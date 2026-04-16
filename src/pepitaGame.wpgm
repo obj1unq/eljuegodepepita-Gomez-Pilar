@@ -1,0 +1,41 @@
+import wollok.game.*
+
+object pepita {
+
+	var energia = 100
+	var property position = game.at(3, 5)
+
+    method image() = "pepita.png"
+
+	method comer(comida) {
+		energia = energia + comida.energiaQueOtorga()
+	}
+
+	method volar(kms) {
+		energia = energia - 10 - kms 
+	}
+	
+	method energia() {
+		return energia
+	}
+}
+
+object silvestre {
+  method position() {
+    return game.at(pepita.position(). x(), 0)
+  }
+ //wollok init--game.
+  method image() = "silvestre.png"
+}
+
+program juego {
+  game.width(10)
+  game.height(7)
+  game.cellSize(50)
+  game.title("Pepita.Y.Silvestre")
+  game.addVisual (pepita)
+  game.addVisual(silvestre)
+  game.boardGround("fondo2.jpg")
+  game.start()
+}
+
