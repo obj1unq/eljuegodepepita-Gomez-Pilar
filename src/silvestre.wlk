@@ -1,12 +1,14 @@
-import pepita.* // Importa el objeto pepita
+import pepita.* 
 import wollok.game.*
 
 object silvestre {
-    // REQUERIMIENTO: Persigue en X
-    // BONUS: No pasa del x = 3
-    method position() {
-        return game.at(pepita.position().x().max(3), 0)
-    }
+  var property position = game.at(3,0)
+  var property presa = pepita
 
-    method image() = "silvestre.png"
+  method image() = "silvestre.png"
+
+  method position() = game.at(self.x(),0)
+
+  method x() = presa.position().x()
+
 }

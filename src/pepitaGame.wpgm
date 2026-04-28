@@ -2,21 +2,14 @@ import pepita.*
 import silvestre.*
 import wollok.game.*
 
+
 program juego {
-    game.width(10)
-    game.height(7)
-    game.cellSize(50)
-    game.title("Pepita y Silvestre")
-    game.boardGround("fondo2.jpg")
-
-    game.addVisual(silvestre)
-    game.addVisual(pepita)
-
-    keyboard.up().onPressDo { pepita.position(pepita.position().up(1)) }
-    keyboard.down().onPressDo { pepita.position(pepita.position().down(1)) }
-    keyboard.left().onPressDo { pepita.position(pepita.position().left(1)) }
-    keyboard.right().onPressDo { pepita.position(pepita.position().right(1)) }
-
-    game.start()
+  game.width(10)
+  game.height(10)
+  game.cellSize(50)
+  game.title("El juego de Pepita")
+  game.boardGround("fondo2.jpg")
+  game.addVisualCharacter(pepita)
+  game.addVisualCharacter(silvestre)
+  game.start()
 }
-
