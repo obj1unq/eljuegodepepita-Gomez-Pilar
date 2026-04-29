@@ -25,11 +25,11 @@ program juego {
     keyboard.left().onPressDo { pepita.volar(pepita.position().left(1)) }
     keyboard.right().onPressDo { pepita.volar(pepita.position().right(1)) }
     game.onCollideDo(pepita, { algo => 
-        if (algo === silvestre) {
+        if (algo.esSilvestre()) {
             pepita.terminar()
             game.say(pepita, "¡PERDÍ!")
             game.schedule(2000, { game.stop() })
-        } else if (algo === nido) {
+        } else if (algo.esNido()) {
             pepita.terminar()
             game.say(pepita, "¡GANÉ!")
             game.schedule(2000, { game.stop() })
