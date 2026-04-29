@@ -1,0 +1,42 @@
+import src.extras.nivel
+import src.extras.Muro
+import src.extras.nido
+import src.comidas.alpiste
+import src.comidas.manzana
+import pepita.*
+import silvestre.*
+import wollok.game.*
+
+
+program juego {
+    game.width(10)
+    game.height(10)
+    game.cellSize(50)
+    game.title("Pepita Quest")
+    game.boardGround("fondo2.jpg")
+    game.addVisual(pepita)
+    game.addVisual(silvestre)
+    game.addVisual(nido)
+    game.addVisual(new Muro(position = game.at(5, 5)))
+    game.onTick(800, "caer por gravedad", { pepita.caer() })
+    game.onTick(3000,"generar comida" ,{ nivel.generarComida() })
+    keyboard.up().onPressDo { pepita.volar(pepita.position().up(1)) }
+    keyboard.down().onPressDo { pepita.volar(pepita.position().down(1)) }
+    keyboard.left().onPressDo { pepita.volar(pepita.position().left(1)) }
+    keyboard.right().onPressDo { pepita.volar(pepita.position().right(1)) }
+    game.onCollideDo(pepita, { algo => 
+        if (algo.esSilvestre()) {
+            pepita.terminar()
+            game.say(pepita, "¡PERDÍ!")
+            game.schedule(2000, { game.stop() })
+        } else if (algo.esNido()) {
+            pepita.terminar()
+            game.say(pepita, "¡GANÉ!")
+            game.schedule(2000, { game.stop() })
+        } else if (not algo.esMuro()) {
+            pepita.comer(algo)
+            nivel.pepitaComio(algo)
+        }
+    })
+    game.start()
+}
